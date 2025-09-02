@@ -1,0 +1,68 @@
+import java.util.Scanner;
+
+public class Ejer12Matriz {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int[][] matriz = crearMatriz(scanner);
+
+        if (matriz == null) {
+            System.out.println("No se puede realizar la matriz.");
+            return;
+        }
+
+        System.out.println("\nMatriz original:");
+        mostrarMatriz(matriz);
+
+        transponerMatriz(matriz);
+
+        System.out.println("\nMatriz final (Traspuesta):");
+        mostrarMatriz(matriz);
+        
+        scanner.close();
+    }
+
+    // Módulo crear y cargar matriz
+    public static int[][] crearMatriz(Scanner scanner) {
+        System.out.print("Ingrese el tamaño de la matriz cuadrada (n): ");
+        int n = scanner.nextInt();
+
+        if (n <= 0) {
+            System.out.println("El tamaño debe ser un número positivo.");
+            return null;
+        }
+
+        int[][] matriz = new int[n][n];
+        System.out.println("Ingrese los valores de la matriz:");
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                System.out.print("Matriz[" + i + "][" + j + "]: ");
+                matriz[i][j] = scanner.nextInt();
+            }
+        }
+        return matriz;
+    }
+
+    // Módulo para transponer la matriz
+    public static void transponerMatriz(int[][] matriz) {
+        int n = matriz.length;
+        
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                // Intercambiar matriz[i][j] con matriz[j][i]
+                int temp = matriz[i][j];
+                matriz[i][j] = matriz[j][i];
+                matriz[j][i] = temp;
+            }
+        }
+    }
+
+    // Módulo para mostrar la matriz 
+    public static void mostrarMatriz(int[][] matriz) {
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[i].length; j++) {
+                System.out.printf("%6d", matriz[i][j]);
+            }
+            System.out.println();
+        }
+    }
+}
